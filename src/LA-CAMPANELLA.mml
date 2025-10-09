@@ -1,0 +1,1135 @@
+// リスト パガニーニによる大練習曲3番 ラ・カンパネラ
+////////////////////////////////////////////////////
+// 作曲 Niccolo Paganini
+// 編曲 Franz Liszt
+
+Int DEBUG=0			// 1=メトロノーム 2=雑音付き
+Int KEY=0			// 移調
+Int RTEMPO=5		// テンポをRTEMPO%範囲内でランダムにする 0で無効
+Int TEMPORATIO=100	// テンポを％で変化させる 70%以下にしてはならない
+Int TINY=0			// MIDIを軽くする TWM2時必須
+Int IGNORETEMPO=0		// テンポ変化を無効にする
+// Tempo 65
+Int TEMPODIFF=0		// テンポ差分 -5以下にしてはならない
+Int LOOP=2			// ループ回数 26
+System.RandomSeed=1	// 毎回同じ乱数を出す 発音タイミングと音長と音量とペダルのリリースとテンポが乱数
+
+Include(LA-CAMPANELLA.h)
+
+////////////////////////////////////
+// MML
+
+
+#PART1_16={
+	TmpChangeR(90,0)r2.TmpChangeR(100,!2.)
+	TmpChangeR(60,!2.)TmpChangeR(30,!4)TmpChangeR(110,!8)TmpChangeR(90,!4.)
+}
+
+#PEDAL1={
+	Sub{
+		#PEDALON [3 r2.] r4 #PEDALOFF
+	}
+}
+
+#PART1_1={
+	o7 #R #SP l8 #PEDAL1
+	rrrr[3 ROCT(d#)RCDV(1)]
+	rrr[3 ROCT(d#)RCDV(-2)]
+	[r[2 ROCT(d#)RCDV(-2)]]
+	r
+	#PSR o6RMD(d#>d#d#c#)
+}
+#PART1_2={
+	o7 #R #SP l16 #PEDAL1
+	[3 r2.]
+	r4
+	#PPSR l16o7RMD(rd#>)[3 RMD(rd#)]
+}
+#PART1_3={
+	[4 r2.]
+}
+#PART1_4={
+	o5 #R #SP l8 #PEDAL1
+	r[3 ROCT(d#)RCDV(1)]rr
+	r[3 ROCT(d#)RCDV(-2)]rr
+	rROCT(d#)RCDV(-2)rrROCT(d#)r
+	rr rrrr
+}
+
+#PART2_16={
+	TmpChangeR(105,0)TmpChangeR(100,!2.^4.)TmpChangeR(105,!4.)
+	TmpChangeR(100,!2.^4.)TmpChangeR(105,!4.)
+	TmpChangeR(105,0)TmpChangeR(100,!2.^4.)TmpChangeR(105,!4.)
+	TmpChangeR(90,!4.)TmpChangeR(100,0)TmpChangeR(80,!4.)
+	TmpChangeR(83,!4.)TmpChangeR(75,!4^16)TmpChangeR(45,!32)TmpChangeR(85,!32)
+
+	TmpChangeR(75)TmpChangeR(88,!8)TmpChangeR(95,!4)TmpChangeR(107,!2.)TmpChangeR(110,!4.)
+	TmpChangeR(105,!2.^4.)TmpChangeR(110,!4.)
+	TmpChangeR(105,0)TmpChangeR(115,!2.)TmpChangeR(110,!4.)TmpChangeR(95)TmpChangeR(90,!4.)
+	TmpChangeR(95,!4.)TmpChangeR(100,0)TmpChangeR(65,!4.)
+	TmpChangeR(80,!4.)TmpChangeR(60,!4.)
+}
+#PEDAL2={
+	Sub{
+		[6 #PEDALON r8r8 #PEDALOFF r8]
+		#PEDALON r8r8r8 #PEDALOFF r8r8r8
+		[3 r2.]
+		#PEDALON r8r8r8 #PEDALOFF r4.
+
+		[3 #PEDALON r8. #PEDALOFF r8.] r4.
+		r2.
+		r2.
+		r2.
+		r2.
+		r2.
+		#PEDALON r2^8 #PEDALOFF r8
+	}
+}
+#PART2_1={
+	o7 #R #PSR l8 Q(44,46) #PEDAL2
+	RMDCresc(2)o6RMD(bba#g#gg#)
+	RMDCresc(-2)o6RMD(a#d#d# ed#c#)
+	RMDCresc(2)o5RMD(bba#g#gg#)
+	RMDCresc(-7)o5RMD(a#d#>)#MR RMDCresc(2)RMD(d#>d#d#c#)
+	RMDCresc(-1)o6RMD(bba#g#gg#)
+	RMDCresc(3)o6RMD(a#d#d#ed#)RCD(c#d#)
+	RMDCresc(-2)o6RMD(d#)r>RMD(d#)<RMD(d#)r>RMD(d#)
+	r4.o7l16RMD(rd#rd#rc#)
+
+	l8#PSR Sub{r-64RMD(c#64)}#MR RMDCresc(3)o6RMD(bba#)#PSR Sub{r-64RMD(a#)}#MR RMDCresc(3)RMD(g#gg#)
+	#PSR Sub{r-48RMD(g96g#96)}#MSR RMDCresc(-3)o6RMD(a#d#d#)Sub{#PSR r-64RMD(f#64)}#MR RMDCresc(-3)RMD(ed#c#)
+	#PSR Sub{r-64RMD(c#)}#MR RMDCresc(2)o5RMD(bba#)#PSR Sub{r-64RMD(a#)}#MR RMDCresc(2)RMD(g#gg#)
+	RMDCresc(-7)o5RMD(a#d#>)RMDCresc(5)RMD(d#>d#d#c#)
+	#PSR Sub{r-64RMD(c#64)}#MR RMDCresc(-3)o6RMD(bba#)#PSR Sub{r-64RMD(a#64)}#MR RMDCresc(-3)RMD(g#gg#)
+	#PSR Sub{r-48RMD(g96g#96)} #MR RMDCresc(3)o6RMD(a#d#d#)#PSR Sub{r-64RMD(f#64)}#MR RMDCresc(4)RMD(ed#c#)
+	RMDCresc(-2)o6RMD(d#)r>RMD(d#)<RMD(d#)r>RMD(d#)
+	#PSR RMDCresc(-2)l16o3RMD(g#>b>d#g#>d#g# b>d#g#) r8.
+}
+
+#PART2_2={
+	o8 #R #PPSR l16 Q(39,41) #PEDAL2
+	RMDCresc(5)[6 RMD(rd#)]
+	[2 RMD(rd#)]<#PPR [4 RMD(rd#)]
+	RMDCresc(4)[6 RMD(rd#)]
+	RMDCresc(-6)RMD(rd#)<RMD(rd#)>RMD(rd#)>#PPR [3 RMD(rd#)]
+	RMDCresc(6)[6 RMD(rd#)]
+	[2 RMD(rd#)]<#PPR [4 RMD(rd#)]
+	RMDCresc(3)o7 RMD(rd#<g#b>)RMD(r>d#<)RMD(rd#<ga#>)RMD(r>d#<)
+	rrrr o6RMD(d#>d#)>[3 RMD(d#r)]
+
+	#PPSR RMDCresc(5)[6 RMD(rd#)]
+	[2 RMD(rd#)]<#PPR [4 RMD(rd#)]
+	RMDCresc(4)[6 RMD(rd#)]
+	RMDCresc(-6)RMD(rd#)<RMD(rd#)>RMD(rd#)>#PPSR [3 RMD(rd#)]
+	RMDCresc(6)[6 RMD(rd#)]
+	[2 RMD(rd#)]<#PPR [1 RMD(rd#)]#PR RMDCresc(-3)[3 RMD(rg#)]
+	#PPR RMDCresc(3)o7 RMD(rd#<g#b>)RMD(r>d#<)RMD(rd#<ga#>)RMD(r>d#<)
+	r2.
+}
+#PART2_3={
+	o4 #R #SP l8 Q(34,36) #PEDAL2
+	[8 r2.]
+	rRCD(d#b)r rRCD(g#>d#<)r
+	rRCD(a#>g<)r [RCD(>ga#<)]r
+	RMD(>g#g#<)r [RCD(b>df<)]r
+	r2.
+
+	rRCD(d#b)r rRCD(g#>d#<)r
+	rRCD(a#>g<)r Q(44,46)RCD(>c#g#a#<)RCD(>d#g#a#<)RCD(>eg#a#<)
+	Q(64,66)RCD(>d#g#b<)rr rrr
+	r2.
+}
+#PART2_4={
+	o4 #R2 #SP l8 Q(34,36) #PEDAL2
+	RCD(g#>d#b<)rrRCD(b>g#>d#<<)rr
+	RCD(>d#a#>g<<)rrRCD(>ga#<)rr
+	RMD(>g#<)rrRCD(b>df<)rr
+	#PP #R RCD(>d#g<)rrrrr
+	#R2 RCD(g#>d#b<)rrRCD(b>g#>d#<<)rr
+	RCD(>d#a#>g<<)rrRCD(>ga#<)rr
+	#R RCD(>g#b<)rrRCD(>d#g>c#<<)rr
+	#PP o4RMD(g#16>d#16b16>g#16)r8r4.
+
+	o3l8#P Q(44,46) RMD(g#)rr RMD(b)rr
+	>RMD(d#)rr rrr
+	rrr rrr
+	o4RCD(d#>g<)rrrrr
+
+	o3l8 RMD(g#)rr RMD(b)rr
+	>RMD(d#)rr rrr
+	rrr o4Q(74,76)RCD(d#>c#g)rr
+	r2.
+	
+}
+
+#PART3_16={
+	TmpChangeR(95)TmpChangeR(105,!2.)
+	TmpChangeR(100,!2.^4.)TmpChangeR(107,!4.)
+	TmpChangeR(102,!2.^4.)TmpChangeR(110,!4.)
+	TmpChangeR(105,!4.)TmpChangeR(95,!4.)
+	[3 TmpChangeR(100,!8)TmpChangeR(90)r8TmpChangeR(100)r8]
+	TmpChangeR(100,!8)TmpChangeR(90)r8TmpChangeR(92)r8
+	TmpChangeR(90)TmpChangeR(100,!4.)TmpChangeR(105,!4.)
+	TmpChangeR(110,!2.)
+	TmpChangeR(100,!2.)
+	TmpChangeR(110,!2.)
+	TmpChangeR(100,!2.)
+	TmpChangeR(105,!2.)
+	TmpChangeR(100,!2.)
+	TmpChangeR(105,!2.)
+	TmpChangeR(115,!2.)
+	TmpChangeR(120,!2.)
+	TmpChangeR(130,!2.^2.)
+	TmpChangeR(90,!2.)
+	TmpChangeR(100,!2.)
+}
+
+#PEDAL3={
+	Sub{
+		[6 r2.]
+		[4 r16r16 #PEDALON r16r16 r16 #PEDALOFF r16]
+		[#PEDALON r4. #PEDALOFF]
+
+		[2 #PEDALON r4. #PEDALOFF]
+		#PEDALON r4 #PEDALOFF r8 #PEDALON r4. #PEDALOFF
+		[2 #PEDALON r4. #PEDALOFF]
+		#PEDALON r4 #PEDALOFF r8 r4.
+
+		[7 r2.]
+		r4.#PEDALON r4.r16 #PEDALOFF
+		r-16 r8r8 #PEDALON r8 #PEDALOFFa #PEDALONa r4 #PEDALOFF #PEDALON r8 #PEDALOFF
+	}
+}
+
+#PART3_1={
+	o5 #R #MR l16 Q(34,36) #PEDAL3
+	r2.
+	#M Q(110,112)RMDCresc(-2)RMD(>c#32<b32a#32b32)#MR  Q(44,46)RMD(f#>>f#<<b>>f#<<)	Q(110,112)RMDCresc(-2)RMD(>d#32c#32c32c#32<)#MR Q(44,46)RMD(f#>>f#<c#>f#<<)
+	#M Q(110,112)RMDCresc(-2)RMD(>e32d#32d32d#32)#MR Q(44,46)RMD(<b>>f#<<) r2
+	#MS RMDCresc(-2)o6Q(110,112)RMD(f32d#32d32d#32)#MSR Q(44,46)RMD(<a#>>a#<d#>a#<<)	Q(110,112)RMDCresc(-2)RMD(>f#32f32e32f32<)#MSR Q(44,46)RMD(a#>>a#<f>a#<<)
+	#MS Q(110,112)RMDCresc(-2)RMD(>g#32f#32f32f#32)#MSR Q(44,46)RMD(d#>a#<<) r2
+	#F RMDCresc(-1)o6Q(110,112)RMD(g#32f#32f32f#32)#FR Q(44,46)RMD(c#>>c#<<f#>>c#<<)	#F Q(110,112)RMDCresc(-1)RMD(>a#32g#32g32g#32<)#FR Q(44,46)RMD(c#>>c#<<g#>>c#<<)
+
+	RMDCresc(-1)o6RMD(a#b>!c#8<ba# g#a#!b8a#g#)
+	RMD(f#g#!a#8g#f# ff#!g#8d#f)
+	RMD(f#8)r8r8 #PSR RMDCresc(5)o5RMD(!g#>g#>g#<!g#>g#<!f#>)
+
+	#R #FSR RMDCresc(-9) RMD(g#<!e>>!f#<<g#>>!e<<g#>> !d#<<g#>>!c#<<g#>>!d#<<g#>>)
+	RMD(!e<<g#>>!c#<<g#)rr #FSR RMDCresc(-8)o5RMD(!f#>f#>f#<!f#>f#<!e>)
+	RMD(f#<!d#>>!e<<f#>>!d#<<f#>> !c#<<f#>!b<f#>>!c#<<f#>>)
+	RMD(!d#<<f#>b<f#>)rr #R3 #PR o5RMD(!d#>d#>d#<!d#>d#<!d>)
+	#R #MR RMD(d#<c#>d#<c#>d#<<b)#R3 #MR o7RMD(ed#c#<ba#g#)
+	#R #PR RMD(ga#ba#)rr o6RMD(d#>d#>d#<d#>d#<d>)
+	RMD(d#<c#>d#<c#>d#<b>)RMD(ed#c#<ba#g#)
+
+	RMD(ga#)rrrr RMD(>!d#<d#)rrrr
+	RMD(>!d#<d#)rrrr RMD(>!d#<d#)rrRMD(>!d#<d#)
+	RMDCresc(8)rrRMD(>!d#<d#)rr RMD(>!d#<<a> >d#<<a#> >!d#<<b>)
+	RMD(>!d#<c>!d#<c#>!d#<d >)RMDCresc(-1)RMD(!d#<d#>d#<d#>d#<d#)
+	RMDCresc(-17)[3 RMD(>d#<d#)][3 RMD(>d#<d#<d#>d#)]#PPR RMD(>d#<d#)rRMD(d#>d#<d#)
+}
+
+#PART3_2={
+	o5 #R #P l16 Q(39,41) #PEDAL3
+	#P r8r8 rRCD(ga#)RCDV(-2) rRCD(f#a)RCDV(-2) rRCD(fg#)RCDV(-2) rRCD(eg)
+	r2.
+	#P r4 o6 rRCD(<b>d)RCDV(-2) rRCD(<a#>c#)RCDV(-2) rRCD(<a>c)RCDV(-2) rRCD(<g#b>)
+	r2.
+	#P r4 o6 rRCD(df)RCDV(3) rRCD(c#e)RCDV(3) rRCD(cd#)RCDV(3) rRCD(<b>d)
+	r2.
+
+	Q(99,100)o7l16rrr RCD(a#>c#<)RCDV(-1) rr rrr RCD(d#b)RCDV(-1) rr 
+	rrr RCD(c#a#)RCDV(-1) rr rrr RCD(<b>g#) rr
+	rRCD(<a#>f#)rrrr rrrrrr
+
+	[4 r2.]
+	#R3 #PPR r4. o6RMD(ea#c#e<b>f)
+	RMD(<a#>d#f#d#)rr rrrrrr
+	r4. o7RMD(eac#e<b>f)
+	[6 r2.]
+}
+
+#PART3_3={
+	o5 #R #PP l16 Q(39,41) #PEDAL3
+	r8r8 RMDCresc(-3)[4 RMD(b)r]
+	r2.
+	r4 #PP RMDCresc(-2)o6[4 RMD(d#)r]
+	r2.
+	r4 #P RMDCresc(3)o6[4 RMD(f#)r]
+	r2.
+
+	RMDCresc(-1)o6RMD(f#g#r64!a#16..g#f# <b>c#r64!d#16..c#<b)
+	RMD(a#b>r64!c#16..<ba# g#a#r64b16..f#g#)
+	RMD(a#8)r8r8 l8 rrr
+
+	ro6RMD(d#c# c<a#>c)
+	RMD(c#e)r rrr
+	ro6RMD(c#<b a#g#a#)
+	RMD(b>d#)r rrr
+	r2.
+	[8 r2.]
+}
+
+#PART3_4={
+	o4 #R #PP l8 Q(34,36) #PEDAL3
+	r2.
+	#PP rRCD(b>d#<)RCD(f#>d#f#<) RCDV(-2)rRCD(a#>e<)RCD(f#>ef#<)
+	r8 RCD(b>d#<) r2
+	#PP rRCD(>d#f#<)RCD(a#>f#a#<) RCDV(-2)rRCD(>dg#<)RCD(a#>g#a#<)
+	r8 RCD(>d#f#<) r2
+	#P rRCD(>f#a#<)RCD(>c#a#>c#<<) RCDV(3)rRCD(>fb<)RCD(>c#b>c#<<)
+
+	o5l16 rrRMD(f#8)rr rrRMD(<b8>)rr
+	[rrRMD(c#8)rr]
+	RMD(<f#8)	o5#P RMDCresc(8)RMD(f#>f#<g>g<) #PP	l8rRCD(eg#)RCD(d#g#)
+
+	RCD(c#g#)rrRMD(<g#>)rr
+	RMD(c#)r RMD(!g16>g16<) rRCD(d#f#)RCD(c#f#)
+	RCD(<b>f#)rr RMD(<f#>)rr
+	RMD(<b>)r RMD(!d16>d16<) rRCD(<g>d#)RCD(<g#>f)
+	RCD(<a#>g)RCD(<a#>g)RCD(<b>g#) RCD(c#a#)rRCD(df)
+	RCD(d#g)r>RMD(!d16>d16<)< rRCD(g>d#<)RCD(g#>f<)
+	RCD(a#>g<)RCD(a#>g<)RCD(b>g#<) RCD(>c#a)rRCD(df)
+
+	RMDCresc(2)l16RCD(d#g)rRMD(d>d<d#>d#<)rrRMD(d#>d#<e>e<)
+	rrRMD(e>e<f>f<)rrRMD(f#>f<)rr
+	RMD(g>g<)rrRMD(g#>g#<) r4.
+	r2.
+	r2.
+	#M r4l8o5#P RMDCresc(7)RMD(d#)>RMD(d#d#c#)
+}
+
+#PART4_16={
+	TmpChangeR(100)TmpChangeR(110,!2.)
+	TmpChangeR(105,!2.)
+	TmpChangeR(110,!2.)
+	TmpChangeR(100,!2.)
+	TmpChangeR(110,!2.)
+	TmpChangeR(95,!2.)
+	TmpChangeR(105,!4.)TmpChangeR(95,!4.)
+	TmpChangeR(90,!2.)
+
+	TmpChangeR(110,!2.)
+	TmpChangeR(105,!2.)
+	TmpChangeR(110,!2.)
+	TmpChangeR(100,!2.)
+	TmpChangeR(115,!2.)
+	TmpChangeR(105,!2.)
+	TmpChangeR(110,!2.)
+	TmpChangeR(85,!2.)
+	TmpChangeR(35,!2.)
+}
+
+#PEDAL4={
+	Sub{
+		[11 #PEDALON r4. #PEDALOFF]
+		r4.
+		[#PEDALON r4 #PEDALOFF r8]
+		#PEDALON r4 #PEDALOFF r2
+
+		[7 #PEDALON r8 #PEDALOFF r4]r4.
+		[3 #PEDALON r8 #PEDALOFF r4]r4.
+		[3 #PEDALON r2. #PEDALOFF]
+	}
+}
+
+#PART4_1={
+	o6 #R #PPSR l16 Q(44,46) #PEDAL4
+	[3
+		RMD(d#>d#>d#<d#<d#>d# >d#<d#<d#>d#>d#<d#<)
+	]
+	RMD(d#>d#>d#<d#<d#>d# >d#<d#<)rRMD(>d#>d#<d#<)
+	RMD(d#>d#>d#<d#<d#>d# >d#<d#<d#>d#>d#<d#<)
+	RMD(d#>d#>d#<d#<d#>d#)[3 rRMD(d#)]
+	RMDCresc(3)rRMD(d#<g#b)rRMD(>>d#<)rRMD(d#<ga#)rRMD(>>d#<)
+	r4 o6#PR l24 RMDCresc(2)RMD(!d#>d#d# !d#d#>d#< !d#d#>d#< !c#c#>c#<)
+
+	#MR RMDCresc(3)<RMD(!bb>b< !bb>b< !a#a#>a#< !g#g#>g#< !gg>g< !g#g#>g#<)
+	RMDCresc(-3)RMD(!a#a#>a#< !d#d#>d#< !d#d#>d#< !ee>e< !d#d#>d#< !c#c#>c#<)
+	RMDCresc(3)<RMD(!bb>b< !bb>b< !a#a#>a#< !g#g#>g#< !gg>g< !g#g#>g#<)
+	RMDCresc(-3)RMD(!a#a#>a#< !d#d#>d# d#d#d# >!d#d#>d#< !d#d#>d#< !c#c#>c#<)
+	RMDCresc(3)<RMD(!bb>b< !bb>b< !a#a#>a#< !g#g#>g#< !gg>g< !g#g#>g#<)
+	RMDCresc(-3)RMD(!a#a#>a#< !d#d#>d#< !d#d#>d#< !ee>e< !d#d#>d#< !c#c#>c#<)
+	RMDCresc(3)RMD(!d#d#>d#< !ee>d#< !ff>d#< !f#f#>d#< !gg>d#< !g#g#>d#<)
+	RMDCresc(2)RMD(!aa>d#< !a#a#>d#< !bb>d#< >!ccd# !c#c#d# !ddd#)
+	RMDCresc(-17)RMD(!d#d#>d#< !ee>d#< !ff>d#< !f#f#>d#< !gg>d#< !g#g#>d#<)
+}
+
+#PART4_2={
+	[8 r2.]
+	[9 r2.]
+}
+
+#PART4_3={
+	o5 #R #M l8 Q(44,46) #PEDAL4
+	r48RMD(b)r-48RMD(ba#) r48RMD(g#)r-48RMD(gg#)
+	r48RMD(a#)r-48RMD(d#d#) r48RMD(e)r-48RMD(d#c#)<
+	r48RMD(b)r-48RMD(ba#) r48RMD(g#)r-48RMD(gg#)
+	r48RMD(a#)r-48RMD(d#)r RMD(>d#48)>RMD(d#16.^96#d#c#)<
+
+	RMDCresc(-1)r48RMD(b)r-48RMD(ba#) r48RMD(g#)r-48RMD(gg#)
+	r48RMD(a#)r-48RMD(d#d# ed#c#)
+	RMDCresc(-3)RMD(d#>)rRMD(d#< d#>)rRMD(d#<)
+	r2.
+
+	#PP Q(15,17)o4r[RCD(d#b)] r[RCD(g#>d#<)]
+	r[RCD(a#>g<)] r[RCD(>d#a#<)]
+	r[RCD(>d#g#<)] r[RCD(>df<)]
+	rRCD(a#>g<)r rrr
+	r[RCD(d#b)] r[RCD(g#>d#<)]
+	#P Q(38,40)rRCDV(3)RCD(a#>g)RCDV(3)RCD(ga#)RCDV(3)RCD(g#b)RCDV(-4)RCD(f#a)RCDV(-5)RCD(eg#)
+	Q(44,46)#R2 #P o5RCD(d#g#b)rr rrr
+	#R #MS o4RCD(d#>c#g<)rr rrr
+	#P RMDCresc(-2)o3RCD(g#>d#b>g#)rr rrr
+}
+
+#PART4_4={
+	o4 #R #PP l8 Q(40,42) #PEDAL4
+	RMD(g#rr brr)
+	RMD(>grr <grr)
+	RMD(g#rr err)
+	RMD(grrrrr)
+
+	RMD(g#rr brr)
+	RMD(>grr)RCD(!c#g#a#)RCD(!d#g#a#)RCD(!eg#a#)
+	RCD(!d#g#b)rrRCD(d#g>c#<)rr
+	o4RMD(g#16b16>d#16g#16)r r4.
+
+	o3 #P RMD(g#rr brr)
+	RMD(>d#rr grr)
+	RMD(g#rr brr)
+	RMD(d#rrrrr)<
+	RMD(g#rr brr)
+	RMD(>d#rrrrr)
+	[3 r2.]
+}
+
+#PART5_16={
+	TmpChangeR(50)r4TmpChangeR(110)TmpChangeR(75,!2)
+	TmpChangeR(100,!2)TmpChangeR(75,!4)
+	TmpChangeR(105,!2)TmpChangeR(80,!4)
+	TmpChangeR(105,!2)TmpChangeR(80,!4)
+	TmpChangeR(105,!2)TmpChangeR(80,!4)
+	TmpChangeR(105,!2)TmpChangeR(40,!4)
+	TmpChangeR(95)TmpChangeR(90,!2.)
+	TmpChangeR(80,!2.)
+	TmpChangeR(88,!2.)
+
+	TmpChangeR(90,!2.)
+	TmpChangeR(85,!2.)
+	TmpChangeR(93,!2.)
+	TmpChangeR(85,!2.)
+	TmpChangeR(65)TmpChangeR(80,!4.)TmpChangeR(70,!4.)
+	TmpChangeR(80)TmpChangeR(75,!2.)
+	TmpChangeR(65)TmpChangeR(83,!4.)TmpChangeR(70,!4.)
+	TmpChangeR(58)TmpChangeR(80,!4.)TmpChangeR(60,!4.)
+	TmpChangeR(48)TmpChangeR(55,!4.)TmpChangeR(40)TmpChangeR(54,!4.)
+	TmpChangeR(52)TmpChangeR(58,!4.)TmpChangeR(52,!4.)
+	TmpChangeR(65)TmpChangeR(82,!4.)TmpChangeR(76,!4.)
+	TmpChangeR(75)TmpChangeR(85,!4.)TmpChangeR(75,!4.)
+	TmpChangeR(75)TmpChangeR(85,!4.)TmpChangeR(75,!4.)
+	TmpChangeR(75)TmpChangeR(85,!4.)TmpChangeR(75,!4.)
+	TmpChangeR(75)TmpChangeR(85,!4.)TmpChangeR(90,!4.)
+}
+
+#PEDAL5={
+	Sub{
+		r8r8#PEDALON r8 #PEDALOFF r8r8r8
+		r2.
+		r8r8#PEDALON r8 #PEDALOFF r8r8r8
+		r2.
+		r8r8#PEDALON r8 #PEDALOFF r8r8r8
+		r2.
+
+		[4 #PEDALON r8. #PEDALOFF r8.]
+		r8 [5 #PEDALON r8 #PEDALOFF]
+		[#PEDALON r4. #PEDALOFF]
+		r8 [5 #PEDALON r8 #PEDALOFF]
+		[#PEDALON r4. #PEDALOFF]
+		r8 [5 #PEDALON r8 #PEDALOFF]
+
+		[2 #PEDALON r4. #PEDALOFF]
+		[6 #PEDALON r8 #PEDALOFF]
+		[2 #PEDALON r4. #PEDALOFF]
+		[2 #PEDALON r4. #PEDALOFF]
+		#PEDALON r4. #PEDALOFF #PEDALON r4.
+		r2.
+		r8 #PEDALOFF #PEDALON r8 r2
+		r2.
+		r2.
+		r2.
+		r2.#PEDALOFF
+	}
+}
+
+#PART5_1={
+	o5 #R #M l16 Q(30,32) #PEDAL5
+	r8r8rr RMDCresc(-3)RMD(bbbbbb)
+	l32#PR RMDCresc(2)RMD(>c#<ba#b>) rRMD(f#f#f#)rRMD(bbb)>rRMDCresc(-2)RMD(c#c#c#)rRMD(f#f#f#)l24r[2RCD(f#>c#<)]
+	r[2RCD(f#>d#<)]r8 l16#M RMDCresc(-3)o6RMD(d#8d#d#d#d#d#d#)
+	l32#MR RMDCresc(2)RMD(fd#dd#) rRMD(a#a#a#)>rRMD(d#d#d#)rRMDCresc(-2)RMD(fff)rRMD(a#a#a#)l24r[2RCD(a#>f<)]
+	r[2RCD(a#>f#<)]r8 l16#M RMDCresc(-3)o6RMD(f#8f#f#f#f#f#f#)
+	l32#FR RMDCresc(2)RMD(g#f#ff#) >rRMD(c#c#c#)rRMD(f#f#f#)rRMD(g#g#g#)l24r[5RCD(g#>c#<)RCDV(4)]
+
+	#R3 Q(56,64) #PR >[6 l32RMD(c#d#)][6 RMD(<b>c#)]
+	<[6 RMD(a#b)][4 RMD(g#a#)]RMD(g#d#ef)
+	Sub{l40 RMD(f#g#f#g#f#) l32 rRMD(f#g#f#) rRMD(gg#g) rRMD(g#ag#)l40RMD(ag#ag#g)}r2.
+
+	l32[12 RMD(g#a)]
+	Sub{[RMD(g#a)]RMD(g#16)r16 rRMD(gag) rRMD(f#g#f#)l39RMD(g#f#g#f#f)}r2.
+	l32[12 RMD(f#g#)]
+	RMDCresc(5)[RMD(f#g#)]RMD(f#16)r16 rRMD(dd#d) rRMD(d#ed#ed#ed#ed#ed#)
+
+	#MR o7l41Sub{RMDCresc(15)RMD(ed#dd#eff#gg#aa#b>cc#dd#)RMDCresc(-15)RMD(ef#ed#dc#c<ba#ag#gf#fe)}r2.
+	Sub{l32 RMD(d#8) o5 Sub{RMD(a#8)}rRMD(>a#ba#<)>Sub{RMD(d8)}rRMD(>dd#d<)Sub{RMD(d#8)}rRMD(>d#ed# ed#ed# ed#ed#)}r2.
+	o7l41Sub{RMDCresc(15)RMD(ed#dd#eff#gg#aa#b>cc#dd#)RMDCresc(-15)RMD(ef#ed#dc#c<ba#ag#gf#fe)}r2.
+	o7l43Sub{RMDCresc(15)RMD(d#ed#dd#eff#gg#aa#b>cc#dd#)RMDCresc(-15)RMD(ef#ed#dc#c<ba#ag#gf#fe)}r2.
+	o7l60Sub{RMDCresc(15)RMD(d#ed#dd#eff#gg#aa#b>cc#dd#)RMDCresc(-4)RMD(ef#ed# dd#dc# cc#c<b a#ba#a g#ag#g f#gf#f ef#ed#)}r2.
+	o7l53Sub{RMD(dd#dc# cc#c<b a#ba#a g#ag#g f#gf#f ef#ed# dd#dc# cc#c<b a#ba#a g#ag#g)}r2.
+	o5l37Sub{RMD(f#gf#f eded# fef#f gf#g#g ag#a#a ba#>c<b >c#cdc#)}r2.
+	o6l32Sub{RMD(d#ded# fef#f gf#g#g ag#a#a ba#>c<b >c#cdc#)}r2.
+	o7l32Sub{RMD(d#ded# fef#f gf#g#g ag#a#a ba#>c<b >c#cdc#)}r2.
+	o8l32Sub{[3 RMD(d#ded)][3 RMD(d#ded)]}r2.
+	o8l32Sub{[2 #FSR RMDCresc(-5)[3 RMD(d#ed#e)] ]}r2.
+}
+
+#PART5_2={
+	o5 #R #MR l16 Q(30,32) #PEDAL5
+	r8r8 RMDCresc(-3)RMD(b)RMD(a#ag#gf#fe)
+	l8r #MR RMD(f#b >c#f#>c#)
+	RMD(d#<b16)r16 #MR l16RMDCresc(-3)RMD(d#)RMD(dc#c<ba#ag#)
+	l8r #MSR RMD(a#>d# fa#>f)
+	RMD(f#d#16)r16 #MSR l16RMDCresc(-3)o6RMD(f#)RMD(fed#dc#c<b)
+	l8r #FR RMD(>c#f# g#>c#)r
+
+	o7 #MR l16 RMD(a#ag#gf#8)RMD(g#gf#fd#8)
+	RMD(f#fd#dc#8)RMD(fd#dc#<b8)
+	l8ro6RMD(f#gg#)r4
+
+	o8 #FFR RMDCresc(-4)l8 rRMD(f#ed#c#d#)
+	RMD(ec#16)r16 #M o6RMD(gf#)rr
+	o8 #FFR RMDCresc(-4)l8 rRMD(ed#c#<b>c#)
+	RMD(d#<b16>)r16 #M o6RMD(dd#)rr
+
+	[11 r2.]
+}
+
+#PART5_3={
+	o5 #R #PSR l16 #PEDAL5
+	r8r8 RMDCresc(-3)RMD(g#)Q(30,32)RMD(gf#fed#dc#)
+	r2.
+	r8r8 #MR l16RMDCresc(-3)o5RMD(b8a#ag#gf#f)
+	r2.
+	r8r8 #MSR l16RMDCresc(-3)o6RMD(d#dc#c<ba#ag#)
+	r2.
+
+	#PR o6r8l16RCD(f#a#)RCD(g#b)l8RCD(a#>c#<) r8l16RCD(<b>g#)RCD(c#a#)l8RCD(d#b)
+	r8l16RCD(<a#>f#)RCD(<b>g#)l8RCD(c#a#) r8l16RCD(<g#>f)RCD(<a#>f#)l8RCD(<b>g#)
+	r2.
+
+	o7 #MSR RMDCresc(-4)l8 rRMD(d#c#)rRMD(<a#>c)
+	RMD(re16)r16 rrrr
+	o7 #MSR RMDCresc(-4)l8 rRMD(c#<b)rRMD(g#a#)
+	RMD(<b>d#16)r16 rrrr
+
+	[11 r2.]
+}
+
+#PART5_4={
+	o4 #R #PPS l8 #PEDAL5
+	r2.
+	rRCD(b>d#<)RCD(f#>d#f#<) rRCD(a#>e<)RCD(f#a#>f#<)
+	RMD(<b>)RCD(f#>d#<)r rrr
+	rRCD(>d#f#<)RCD(a#>f#a#<) rRCD(>dg#<)RCD(a#>da#<)
+	RMD(d#)RCD(a#>f#<)r rrr
+	rRCD(>f#a#<)RCD(>c#a#>c#<<) rRCD(>fb<)RCD(>c#f>c#<<)
+
+	#M o5RMD(f#rr<brr)
+	RMD(>c#rrc#rr)
+	RCD(f#>c#a#<)rrr #R2 #M RCD(e>g#<)RCD(d#>f#<)
+
+	RCD(c#>e<)rrRCD(g#>>d#<<)rr
+	#R #M RCD(>c#>c#<<)rrr #R2 #M o5RCD(d#>f#<)RCD(c#>e<)
+	RCD(<b>>d#<)rrRCD(f#>>c#<<)rr
+	#R #M RCD(b>b<)rr ro5#R #M RCD(d#g>d#<)RCD(fg#>d<)
+
+	#R4 o5 l8 RCD(ga#>c#<)rr RCD(g#b>e<)rr
+	RCD(d#>g<)rr r RCD(d#g>d#<)RCD(fg#>d<)
+	#R2 o5 l8 RCD(ga#>c#<)rr RCD(g#b>e<)rr
+	RCD(d#a#>g<)rr RCD(<g#>b)rr
+	RCD(<d#>g)rr RCD(<<g#>b>)rr
+	r2.
+	r RCD(<<g>a#>c#)r rrr
+	r2.
+	r2.
+	r2.
+	r2.
+}
+
+#PART6_16={
+	TmpChangeR(90)TmpChangeR(80,!2.)
+	TmpChangeR(90,!2.)
+	TmpChangeR(85,!2.)
+	TmpChangeR(95,!2.)
+	TmpChangeR(80,!2.)
+	TmpChangeR(95,!2.)
+	TmpChangeR(85,!2.)
+	TmpChangeR(80,!2.)
+	TmpChangeR(40,!8)TmpChangeR(85)TmpChangeR(90,!8^2)
+	TmpChangeR(95,!2.)
+	TmpChangeR(90,!2.)
+	TmpChangeR(95.!2.)
+	TmpChangeR(90,!2.)
+	TmpChangeR(85,!2.)
+	TmpChangeR(95.!2.)
+	TmpChangeR(90,!2.)
+	TmpChangeR(80,!2.)
+	TmpChangeR(45)TmpChangeR(60,!4.)TmpChangeR(35,!4.)
+	TmpChangeR(60)TmpChangeR(5,!4.)
+}
+
+#PEDAL6={
+	Sub{
+		#PEDALON r2. #PEDALOFF
+		[#PEDALON r4. #PEDALOFF]
+		[#PEDALON r4. #PEDALOFF]
+		[#PEDALON r4. #PEDALOFF]
+		[#PEDALON r4. #PEDALOFF]
+
+		[#PEDALON r4. #PEDALOFF]
+		#PEDALON r4. #PEDALOFF r4.
+		[#PEDALON r8 #PEDALOFF r8 #PEDALON r8 #PEDALOFF]
+		#PEDALON r4 #PEDALOFF r2
+
+		[#PEDALON r8 #PEDALOFF r4]
+		[#PEDALON r8 #PEDALOFF r4]
+		[#PEDALON r8 #PEDALOFF r4]
+		#PEDALON r8 #PEDALOFF r4 r8r8r8
+		[#PEDALON r8 #PEDALOFF r4]
+		#PEDALON r2. #PEDALOFF
+		[3 r128 #PEDALON r-128 r4. #PEDALOFF]
+	}
+}
+
+#PART6_1={
+	o5 #R #M l16 Q(30,32) #PEDAL6
+//	o8l32Sub{#FSR RMDCresc(-60)[3 RMD(d#ed#e)]}r4. #PSR [6 RMD(d#e)#PR]
+	o8l32Sub{#FSR RMD(d#ed#e) #FR RMD(d#ed#e) #MR RMD(d#ed#e)}r4. #PSR [2 RMD(d#e)]#PR [2 RMD(d#e)][2 RMD(d#e)]
+	[6 RMD(d#ed#e)]
+	[6 RMD(d#ed#e)]
+	[6 RMD(d#ed#e)]
+	[6 RMD(d#ed#e)]
+	[o8RMD(d#ed#<d# d#ed#<d#> d#24e24d#24)]
+	[o8RMD(d#ed#<d# d#ed#<d#> d#24e24d#24)]
+	[o8RMD(d#ed#<d#)r8r8]
+	r8r8 #PR o6RMD(r>d#ed#)RMD(r>d#ed#<)RMD(r>d#ed#<)RMD(r>c#d#c#<)
+
+	[rRMD(b>c#<b)]rRMD(a#ba#)rRMD(g#a#g#)rRMD(gg#g)rRMD(g#a#g#)
+	rRMD(a#ba#)[rRMD(d#ed#)]rRMD(ef#e)rRMD(d#ed#)rRMD(c#d#c#)<
+	[rRMD(b>c#<b)]rRMD(a#ba#)rRMD(g#a#g#)rRMD(gg#g)rRMD(g#a#g#)
+	rRMD(a#ba#)rRMD(d#ed#)>rRMD(d#ed#)>[rRMD(d#ed#)]rRMD(c#d#c#)	
+	[rRMD(cc#c)]<rRMD(aba)[rRMD(g#ag#)]rRMD(f#g#f#)
+	RMDCresc(3)rRMD(ef#e)rRMD(c#d#c#)rRMD(d#ed#)rRMDCresc(-3)RMD(ef#e)rRMD(d#ed#)rRMD(c#d#c#)
+
+	Q(80,84)o6l61Sub{RMDCresc(2)RMD(d#>d#<eff#gg#aa#b>cc#dd#eff#gg#aa#b>cc#)RMDCresc(-3)RMD(dd#f#ec#<a#gdd#f#ec#<a#gec#<a#gec#<a#g}r2.
+	Q(30,32)o3l48 #PPR RMD(g#>d#g#b>d#g# b>d#g#b>d#b g#8)
+}
+
+#PART6_2={
+	o7 #R #PP l8 Q(25,27) #PEDAL6
+	r8r8r8 r8r8RMD(d#)
+	[6 RMD(d#)]
+	[6 RMD(d#)]
+	[6 RMD(d#)]
+	[6 RMD(d#)]
+	[3 r2.]
+	r8r8 #MS o6l8RMD(d#>d#d#c#<)
+
+	RMD(bba#g#gg#)
+	RMD(a#d#d#ed#c#<)
+	RMD(bba#g#gg#)
+	RMD(a#d#>d#>d#d#c#)
+	RMD(cc<ag#g#f#)
+	RMDCresc(6)RMD(ec#d#)RMDCresc(-6)RMD(ed#c#)
+	r2.r4.
+}
+
+#PART6_3={
+	o6 #R #M l8 Q(40,42) #PEDAL6
+	rrRMD(d#>d#d#c#)<
+	#R2 #M RCD(<g#>b)RMD(ba#)RCD(<b>g#)RMD(gg#)
+	#R #M RCD(ga#)RMD(d#d#)#R2 #M RCD(<ga#>e)RMD(d#c#)<
+	#R #M RCD(g#b)RCD(g#b)RCD(f#a#)RCD(eg#)RMD(gg#)
+	RCD(ga#)RMD(d#)r16RMD(d#16)>RMD(d#d#c#)<
+
+	#R2 #M RCD(<g#>b)RMD(ba#)RCD(<b>g#)RMD(gg#)
+	#R #M RCD(ga#)RMD(d#d#) RCD(<b>g#)RCD(cf#)RCD(c#e)
+	o5 RMD(d#) >l16RCD(<b>g#)RCD(d#b)l8RCD(g#>d#<) o5 RMD(d#) >l16RCD(<a#>g)RCD(c#a#)l8RCD(g>d#<)
+	o4 Sub{RMD(g#8>d#32b32>g#16)}r2.
+
+	o4 #R #PS l8 Q(25,27)
+	[rRCD(d#b>d#<)RCD(g#b>d#<)]
+	rRCD(g>d#g<)RCD(a#>d#g<) rRCD(>c#d#a#<)RCD(a#>d#a#<)
+	rRCD(>d#g#<)RCD(b>d#<) rRCD(b>d<)RCD(a#>d<)
+	rRCD(ga#)RCD(>ga#<) RCD(>>ga#<<)rr
+	[rRCD(a>d#f#<)RCD(>cd#f#<)]
+	>rRCD(ea)RCD(ca)RCD(c#a)RCD(f#a)RCD(ea)
+	RCD(d#g#b)rr #FF RCD(<d#>c#g)rr
+	r4.
+}
+
+#PART6_4={
+	o2 #R #PS l8 Q(40,42) #PEDAL6
+	[9 r2.]
+	ROCT(g#)rr ROCT(b)rr
+	>ROCT(d#)rr RMD(g)rr
+	RMD(g#rr)RMD(err)
+	RMD(d#rrrrr)
+	RMD(g#rr)>RMD(crr)
+	RMD(c#rrrrr)
+
+	r2.r4.
+}
+
+#PART7_16={
+	TmpChangeR(90)TmpChangeR(110,!4.)
+	TmpChangeR(100,!2.^4.)TmpChangeR(105,!4.)
+	TmpChangeR(115,!2.^4.)TmpChangeR(120,!4.)
+	TmpChangeR(110,!2.)
+	TmpChangeR(125,!2.)
+	TmpChangeR(95,!2.)
+
+	TmpChangeR(120,!2.)
+	TmpChangeR(95,!2.)
+	TmpChangeR(125,!2.)
+	TmpChangeR(105,!2.)
+	TmpChangeR(120,!2.)
+	TmpChangeR(100,!2.)
+	TmpChangeR(125,!2.)
+	TmpChangeR(105,!2.)
+
+	TmpChangeR(120,!2.)
+	TmpChangeR(105,!2.)
+	TmpChangeR(97,!2)TmpChangeR(60,!4)
+
+	TmpChangeR(40)r8TmpChangeR(60)TmpChangeR(125,!2^8)
+	TmpChangeR(132,!2.)
+	TmpChangeR(120,!2.)
+	TmpChangeR(100,!2.)
+	TmpChangeR(80,!2.)
+	TmpChangeR(42)TmpChangeR(115,!2.)
+	TmpChangeR(60,!2)TmpChangeR(80)TmpChangeR(60,!4)
+}
+
+#PEDAL7={
+	Sub{
+		r4.
+		r4.[2 #PEDALON r4.#PEDALOFF]r4.
+		r4.[2 #PEDALON r4.#PEDALOFF]r4.
+		[2 #PEDALON r4.#PEDALOFF]
+		[4 #PEDALON r4.#PEDALOFF]
+
+		#PEDALON r8r8 #PEDALOFF r8 #PEDALON r8r8r8
+		r8 #PEDALOFF r8r8r8r8r8
+		#PEDALON r8r8 #PEDALOFF r8 #PEDALON r8r8r8
+		r8 #PEDALOFF r8r8r8r8r8
+		#PEDALON r8r8 #PEDALOFF r8 #PEDALON r8r8r8
+		r8 #PEDALOFF r8r8r8r8r8
+		#PEDALON r8r8 #PEDALOFF r8 #PEDALON r8r8r8 #PEDALOFF
+		[6 #PEDALON r8 #PEDALOFF]
+		[4 #PEDALON r8 #PEDALOFF]r4
+		[4 #PEDALON r8 #PEDALOFF]r4
+		[2 #PEDALON r8 #PEDALOFF]r2
+
+		l8r #PEDALON rrrrr
+		rrrrrr
+		rrrrrr #PEDALOFF
+		#PEDALON rrrrrr
+		rrrrrr
+		rrrrrr
+		rrrr #PEDALOFF #PEDALON rr #PEDALOFF
+		l16
+	}
+}
+#PART7_1={
+	o5 #R #M l16 Q(35,37) #PEDAL7
+	#M r[5 RCD(b>b<)RCDV(2)]
+
+	o6#FFR l8 RMD(bf#b>c#<f#>c#)
+	RMD(d#)rr #M l16r[5 o6RCD(d#>d#<)RCDV(2)]
+
+	o7#FFR l8RMD(d#<a#>d#f<a#>#f)
+	RMD(f#)rr #M l16r[5 o6RCD(f#>f#<)RCDV(2)]
+
+	o7#FFR l8RMD(f#c#f#g#c#g#)
+
+	o7l16#FRR RCD(c#f#a#)RCD(c#g#b)RCD(c#a#>c#<)RCD(c#a#>c#<)RCD(c#g#b)RCD(c#f#a#) RCD(<b>d#g#)RCD(c#d#a#)RCD(d#b)RCD(d#b)RCD(c#d#a#)RCD(<b>d#g#)
+	RCD(<a#>c#f#)RCD(<b>c#g#)RCD(c#a#)RCD(c#a#)RCD(<b>c#g#)RCD(<a#>c#f#) RCD(<g#>c#f)RCD(<a#>c#f#)RCD(<b>c#g#)RCD(<b>c#g#)RCD(<f#>c#d#)RCD(<g#>c#f)
+
+	l8RCD(<f#>c#f#)rrrrr
+
+	#R3 o7l16 RMD(g#8 >f#f#eed#d#c#c#d#d#)
+	l8RMD(e8)rrrrr
+	o7l16 RMD(f#8 >eed#d#c#c#<bb>c#c#)
+	l8RMD(d#8)rrrrr
+	o7l16 RMD(d#8 d#d#d#d#ed#c#<ba#g#)
+	l8RMD(g8)rrrrr
+	o7l16 RMD(d#8 >d#d#d#d#ed#c#<ba#g#)
+	RMD(gf#fedd# ed#c#<ba#g#)
+	RMD(gf#fedd# ed#c#<ba#g#)
+	RMD(gf#fedd# ed#c#<ba#g#)
+
+	RMD(g8) Q(50,52)o5l8 #F RMDCresc(4)RMD(dd#aa#>d)
+	RMD(d#aa#>dd#a)
+	RMD(a#>dd#dd#d)
+	RMD(d#d#d#d#d#d#)
+	RMD(d#d#d#d#d#d#)
+	l16RMDCresc(-15)[RMD(d#d#d#d#d#d#)]
+	RMDCresc(18)RMD(d#d#d#d#d#d# d#d#d#d#c#c#)
+}
+#PART7_2={
+	o5 #R #FR l16 Q(50,22) #PEDAL7
+	r4.
+
+	o5RMD(rf#bf#)RMD(rf#)RMD(rf#>c#<f#)RMD(rf#)
+	rRMD(f#>d#b>d#b)r4.
+	o5RMD(ra#>d#<a#)RMD(ra#)RMD(ra#>f<a#)RMD(ra#)
+	rRMD(a#>f#>d#f#>d#)r4.
+	o6RMD(rc#f#c#)RMD(rc#)RMD(rc#g#c#)RMD(rc#)
+	o5r8l16RMD(c#a#>f#a#<) r8RMD(<b>g#>d#g#<)
+	r8RMD(<a#>f#>c#f#<) o6r8RMD(f<g#c#b)
+	r2.
+
+	#R3 #FFR o6l16 RMD(g#8 >f#f#eed#d#c#c#d#d#)
+	l8RMD(e8)rrrrr
+	o6l16 RMD(f#8 >eed#d#c#c#<bb>c#c#)
+	l8RMD(d#8)rrrrr
+	o6l16 RMD(d#8 d#d#d#d#ed#c#<ba#g#)
+	l8RMD(g8)rrrrr
+	o6l16 RMD(d#8 >d#d#d#d#ed#c#<ba#g#)
+	RMD(gf#fedd# ed#c#<ba#g#)
+	RMD(gf#fedd# ed#c#<ba#g#)
+	RMD(gf#fedd# eeeefe)
+
+	r8Q(50,52)o4l8 #F RMDCresc(4)RMD(dd#aa#>d)
+	RMD(d#aa#>dd#a)
+	RMD(a#>dd#dd#d)
+	RMD(d#d#d#d#d#d#)
+	RMD(d#d#d#d#d#d#)
+	l16RMDCresc(-15)[RMD(d#d#d#d#d#d#)]
+	RMDCresc(18)RMD(d#d#d#d#d#d# d#d#d#d#c#c#)
+}
+
+#PART7_3={
+	o5 #R #FR l16 Q(35,37) #PEDAL7
+	r4.
+
+	o5rRMD(d#<f#>d#)rRMD(d#) rRMD(e<f#>e)rRMD(e)
+	rRMD(d#<f#<bf#<b) r4.
+
+	o5rRMD(d#<a#>d#)rRMD(d#) rRMD(g#dg#)rRMD(g#)
+	rRMD(f#<a#d#<a#d#) r4.
+
+	o5rRMD(a#c#a#)rRMD(a#) rRMD(bc#b)rRMD(b)
+	[2 r2.]
+
+	r2.
+	r8 o6l16[10 RMD(g#)]
+	RMD(g#8)r8r8r8r8r8
+	r8 o6l16[10 RMD(f#)]
+	RMD(f#8)r8r8r8r8r8
+
+	o5l16 #R3 #FFR r8 RMD(ggg#g#aaggff)
+	r2.
+	o5l16 #R3 r8 RMD(>d#d#fff#f#ggff)
+	RMD(d#d#<bbaa a#a#f#f#ff)
+	RMD(d#d#<bbaa a#a#f#f#ff)
+	RMD(d#d#<bbaa a#a#a#a#bb)
+
+	RMD(a#8) l8r16o4#F RMDCresc(4)RMD(dd#aa#>d)
+	RMD(d#aa#>dd#a)
+	RMD(a#>dd#dd#d)
+	RMD(c#<a#gd#c#<a#)
+	RMD(gd#c#<a#gd#)
+	r-16 r2.
+	#M l8 o5rrRMD(d#>d#)rr
+}
+#PART7_4={
+	o5 #R #M l16 Q(35,37) #PEDAL7
+	rRMD(g#)RCDV(2)RCD(ga#)RCDV(2)RCD(f#a)RCDV(2)RCD(fg#)RCDV(2)RCD(eg)RCDV(2)
+
+	#F o3l8RMD(b>b<b f#>a#<f#)
+	RMD(b)rr l16#M o5rRMD(b)RCDV(2)RMD(>d<)RCDV(2)RCD(a#>c#<)RCDV(2)RCD(a>c<)RCDV(2)RCD(g#b)RCDV(2)
+
+	#F o4l8RMD(d#>d#<d#<a#>>d<<a#)
+	o4RMD(d#)rr l16#M o6rRMD(d#)RCDV(2)RCD(df)RCDV(2)RCD(c#e)RCDV(2)RCD(cd#)RCDV(2)RCD(<b>d)RCDV(2)
+
+	#F o4l8RMD(f#>f#<f#c#>f<c#)
+	RMD(f#rr)RMD(<brr>)
+	RMD(c#rr)>RMD(c#rr)
+	l8RCD(f#a#) l16o3[ROCT(f#)][ROCT(g)][ROCT(g#)]>[ROCT(g#)]>[ROCT(g#)]
+
+	l8o6rRMD(d#c#c<a#>c)
+	RMD(c#) l16o3[ROCT(g#)][ROCT(g)][ROCT(f#)]>[ROCT(f#)]>[ROCT(f#)]
+	l8o6rRMD(c#<ba#g#a#)
+	RMD(b) l16o3[ROCT(f)][ROCT(e)][ROCT(d#)]>[ROCT(d#)]>[ROCT(d#)]
+	o5l16 #R3 r8 RMD(d#d#fff#f#eedd)
+	RMD(d#8)o2[ROCT(a#)]>[ROCT(d)][ROCT(d#)]>[ROCT(d#)]>[ROCT(d#)]
+	o5l16 #R3 r8 RMD(ggg#g#aaa#a#>dd)
+	RMD(a#a#g#g#f#f# ggeedd)<
+	RMD(a#a#g#g#f#f# ggeedd)<
+	RMD(a#a#g#g#f#f# ggggdd)
+
+	RMD(d#8)l8r16o3#F RMDCresc(5)rrrrRMD(>d)
+	RMD(d#aa#>dd#a)
+	RMD(a#>dd#dd#d)
+	RMD(c#<a#gd#c#<a#)
+	RMD(gd#c#<a#gd#)
+	r-16r2.
+	r2.
+}
+
+#PART8_16={
+	TmpChangeR(80)TmpChangeR(110,!2.)
+	TmpChangeR(120,!2.)
+	TmpChangeR(125,!2.)
+	TmpChangeR(90,!4.)TmpChangeR(70,!4.)
+	TmpChangeR(110.!2.)
+	TmpChangeR(90,!8)TmpChangeR(110,!4)TmpChangeR(70,!4.)
+	TmpChangeR(130,!2^8)TmpChangeR(110,!8)
+	TmpChangeR(120,!4.)TmpChangeR(75,!4.)
+	TmpChangeR(110,!8)TmpChangeR(130,!4.)TmpChangeR(60,!4)
+	TmpChangeR(110)TmpChangeR(130,!4)TmpChangeR(120,!2)
+	TmpChangeR(130,!2.)
+	TmpChangeR(135,!2.)
+	TmpChangeR(130,!2.)
+	TmpChangeR(135,!2.)
+	TmpChangeR(130,!2.)
+	TmpChangeR(135,!2.)
+	TmpChangeR(128,!2)TmpChangeR(80,!4)
+}
+
+#PEDAL8={
+	Sub{
+		[6 #PEDALON r4. #PEDALOFF]#PEDALON r2.#PEDALOFF
+		[2 #PEDALON r4. #PEDALOFF]
+		#PEDALON r2. #PEDALOFF
+		#PEDALON r2. #PEDALOFF
+		#PEDALON r2. #PEDALOFF
+		[12 #PEDALON r4. #PEDALOFF]
+		#PEDALON r2. #PEDALOFF
+		#PEDALON r2 r8
+	}
+}
+
+#PART8_1={
+	o7 #R3 #FF l16 Q(35,37) #PEDAL8
+	#FF RMDCresc(-10)RMD(bbbb)#FF RMDCresc(-10)RMD(a#a#)#FF RMDCresc(-10)RMD(g#g#)#FF RMDCresc(-10)RMD(gg)#FF RMDCresc(-10)RMD(g#g#)
+	#FF RMDCresc(-10)RMD(a#a#)#FF RMDCresc(-10)RMD(d#d#d#d#)#FF RMDCresc(-10)RMD(ee)#FF RMDCresc(-10)RMD(d#d#)#FF RMDCresc(-10)RMD(c#c#)<
+	#FF RMDCresc(-10)RMD(bbbb)#FF RMDCresc(-10)RMD(a#a#)#FF RMDCresc(-10)RMD(g#g#)#FF RMDCresc(-10)RMD(gg)#FF RMDCresc(-10)RMD(g#g#)
+	#FF RMDCresc(-10)RMD(a#a#)#FF RMDCresc(-10)RMD(d#d#)>#FF RMDCresc(-10)RMD(d#d#)>#FF RMDCresc(-10)RMD(d#d#d#d#)#FF RMDCresc(-10)RMD(c#c#)
+	#FF RMDCresc(-10)RMD(cccc)<#FF RMDCresc(-10)RMD(aa)#FF RMDCresc(-10)RMD(g#g#g#g#)#FF RMDCresc(-10)RMD(f#f#)
+	#FF RMD(e8)<RMDCresc(7)RMD(c#c#d#d#)RMDCresc(-6)RMD(eed#d#c#c#)
+	#FF RMD(d#)#FS RMDCresc(5)RMD(eff#gg# aa#b>cc#d)
+	#SF RMD(d#)#FFS RMDCresc(5)RMD(eff#gg# aa#b>c#dd#)
+
+	#SF o5 l8RCD(<b>d#g#) #FF r8RCD(b>d#b<) l16RCD(a#>d#a#<)RCD(b>b<)l8RCD(>c#>c#<<)l16RCD(b>d#b<)RCD(a#>a#<)
+	l16RCD(b>d#b<)RCD(>c#>c#<<)l8RCD(>d#>d#<<)l16RCD(>c#>c#<<)RCD(b>b<) l16RCD(a#>d#a#<)RCD(b>b<)l8RCD(>c#>c#<<)l16RCD(b>d#b<)RCD(a#>a#<)
+	l16RCD(b>d#b<)RCD(a#>a#<)l8RCD(g#>g#<) >RCD(b>d#b<) l16RCD(a#>d#a#<)RCD(b>b<)l8RCD(>c#>c#<<)l16RCD(b>d#b<)RCD(a#>a#<)
+	l16RCD(b>d#b<)RCD(>c#>c#<<)l8RCD(>d#>d#<<)l16RCD(>c#>c#<<)RCD(b>b<) l16RCD(a#>d#a#<)RCD(b>b<)l8RCD(>c#>c#<<)l16RCD(b>d#b<)RCD(a#>a#<)
+	l16RCD(b>d#b<)RCD(a#>a#<)l8RCD(g#>g#<) < RCD(d#b>d#<) l16RCD(d#a#>d#<)RCD(d#b>d#<)l8RCD(d#>c#d#<)l16RCD(d#b>d#<)RCD(d#a#>d#<)
+	l16RCD(d#b>d#<)RCD(d#a#>d#<)l8RCD(d#g#>d#<) >RCD(d#g#>d#<)< l16RCD(d#a#>d#<)RCD(d#b>d#<)l8RCD(d#>c#d#<)l16RCD(d#b>d#<)RCD(d#a#>d#<)
+	l16RCD(d#b>d#<)RCD(d#a#>d#<)l8RCD(d#g#>d#<) >RCD(d#g#>d#<)< l16RCD(d#b>d#<)RCD(d#a#>d#<)l8RCD(d#g#>d#<) >RCD(g#>d#g#<)< 
+	l16RCD(d#b>d#<)RCD(d#a#>d#<)l8RCD(d#g#>d#<) >RCD(b>g#b<)< l16RCD(d#b>d#<)RCD(d#a#>d#<)l8RCD(d#g#>d#<)
+ 	o7l8^8 RCD(d#g#>d#<)[6 l8 RCD(d#g#>d#<)]
+}
+
+
+#PART8_2={
+	o6 #R3 #FF l16 Q(35,37) #PEDAL8
+	#FF RMDCresc(-10)RMD(bbbb)#FF RMDCresc(-10)RMD(a#a#)#FF RMDCresc(-10)RMD(g#g#)#FF RMDCresc(-10)RMD(gg)#FF RMDCresc(-10)RMD(g#g#)
+	#FF RMDCresc(-10)RMD(a#a#)#FF RMDCresc(-10)RMD(d#d#d#d#)#FF RMDCresc(-10)RMD(ee)#FF RMDCresc(-10)RMD(d#d#)#FF RMDCresc(-10)RMD(c#c#)<
+	#FF RMDCresc(-10)RMD(bbbb)#FF RMDCresc(-10)RMD(a#a#)#FF RMDCresc(-10)RMD(g#g#)#FF RMDCresc(-10)RMD(gg)#FF RMDCresc(-10)RMD(g#g#)
+	#FF RMDCresc(-10)RMD(a#a#)#FF RMDCresc(-10)RMD(d#d#)>#FF RMDCresc(-10)RMD(d#d#)>#FF RMDCresc(-10)RMD(d#d#d#d#)#FF RMDCresc(-10)RMD(c#c#)
+	#FF RMDCresc(-10)RMD(cccc)<#FF RMDCresc(-10)RMD(aa)#FF RMDCresc(-10)RMD(g#g#g#g#)#FF RMDCresc(-10)RMD(f#f#)
+	#FF RMD(e8)<[10 RCD(ea)]
+	#FF RCD(d#g#b)#FS RMDCresc(5)RMD(eff#gg# aa#b>cc#d)
+	#SF RCD(d#ga#)#FFS RMDCresc(5)RMD(eff#gg# aa#b>c#dd#)
+	[7 r2.]
+	r2.
+	r2.
+	r8
+}
+
+#PART8_3={
+	o4 #R3 #F l16 Q(35,37) #PEDAL8
+	[r8[l16RCD(d#b>d#<)]l8RCD(g#b>d#<)]
+	r8[l16RCD(g>d#g<)]l8RCD(a#>d#g<) r8[l16RCD(>c#d#a#<)]l8RCD(>c#d#a#<)
+	r8[l16RCD(b>d#g#<)]l8RCD(b>d#<) r8[l16RCD(a#>d<)]l8RCD(a#>d<)
+	r8[l16RCD(ga#)]l8RCD(ga#>d#<) >l8RCD(ga#>d#<)<rr
+	r8[l16RCD(f#a>d#<)]l8RCD(f#a>d#<) r8[l16RCD(a>d#a<)]l8RCD(a>d#a<)
+	r8l16[RCD(ea>c#<)][RCD(d#a>c#<)][RCD(c#a>c#<)][RCD(d#a>c#<)][RCD(ea>c#<)]
+	RCD(dg#b)[11 r]
+	r2.
+
+	#FS[8 o3r8l16ROCT(d#)ROCT(g#)>l8ROCT(d#)]
+	o3r8l16ROCT(d#)ROCT(g#)l8RCD(b>d#b)r4.
+	r2.
+	r2.
+	r2.
+	r2.
+}
+
+#PART8_4={
+	o2 #R3 #FF l16 Q(35,37) #PEDAL8
+	l8 ROCT(g#)rr ROCT(b)rr>
+	ROCT(d#)rr  ROCT(g)rr
+	ROCT(g#)rr  RMD(e)rr
+	RMD(d#)rr rrr<
+	ROCT(g#)rr >ROCT(c)rr
+	ROCT(c#)rrrrr
+	l16 r o4ROCT(d)ROCT(c#)ROCT(c)<ROCT(b)ROCT(a#) ROCT(a)ROCT(g#)ROCT(g)ROCT(f#)ROCT(f)ROCT(e)
+	RCD(d#ga#>d#<)ROCT(d)ROCT(c#)ROCT(c)<ROCT(b)ROCT(a#) ROCT(a)ROCT(g#)ROCT(g)ROCT(f#)ROCT(f)ROCT(e)
+
+	o2l8 [8 ROCT(g#)rr]
+	ROCT(g#)rr o3l16RCD(a#>d#a#<)RCD(b>d#b<)l8RCD(>c#d#>c#<<)l16RCD(b>d#b<)RCD(a#>d#a#<)
+	l16RCD(b>d#b<)RCD(a#>d#a#<)l8RCD(g#>d#g#<)<RCD(g#>d#g#<)> o3l16RCD(a#>d#a#<)RCD(b>d#b<)l8RCD(>c#d#>c#<<)l16RCD(b>d#b<)RCD(a#>d#a#<)
+	l16RCD(b>d#b<)RCD(a#>d#a#<)l8RCD(g#>d#g#<)<RCD(g#>d#g#<)> l16RCD(b>d#b<)RCD(a#>d#a#<)l8RCD(g#>d#g#<)<RCD(g#>d#g#<)>
+	l16RCD(b>d#b<)RCD(a#>d#a#<)l8RCD(g#>d#g#<)<RCD(g#>d#g#<)>l16RCD(b>d#b<)RCD(a#>d#a#<)l8RCD(g#>d#g#<)
+	l8^8 RCD(g#>d#g#)l8RCD(g#>d#g#)RCD(g#>d#g#) RCD(g#>d#g#)<<RCD(g#>d#g#)<<RCD(g#>d#g#)<<
+}
+
+#PART9_16={
+	TmpChangeR(80)r8TmpChangeR(100,!4.)TmpChangeR(80,!4.)
+	TmpChangeR(75,!2.)
+	TmpChangeR(55)
+}
+
+#PEDAL9={
+	Sub{
+		r8 r2. r8 r8r8
+		r4. r2. #PEDALOFF
+	}
+}
+
+#PART9_1={
+	o7 #R3 #SF l8 Q(35,37) #PEDAL9
+	r8r8 o5 RCD(<b>d#g#)r8r8 l2.o6RCD(g#b>d#g#)
+}
+
+#PART9_4={
+	o2 #R3 #SF l8 Q(35,37) #PEDAL9
+	RCD(g#>d#g#)rr RCD(g#>d#g#) rr
+	l2.o5RCD(<b>d#g#b)
+}
+
+#PART8a_16={
+	TmpChangeR(110)
+	TmpChangeR(90,!2.^4.^4.^2.)
+	TmpChangeR(90)TmpChangeR(100,!4)TmpChangeR(110,!8)TmpChangeR(90,!4.)
+}
+
+#PEDAL8a={
+	Sub{
+		r4.#PEDALOFF
+		#PEDALON r2. r2. #PEDALOFF
+	}
+}
+
+#PART8a_1={
+	o7 #R #SF l8 #PEDAL8a
+	RMDCresc(-25)
+	o7RMD(d#)RMD(d#)
+	RMD(d#d#d#)
+	RMD(d#d#d#d#d#d#)
+	#PSR RMD(d#d#d# d#d#c#)
+}
+#PART8a_2={
+	o7 #R #FF l16 #PEDAL8a
+	RMDCresc(-25)
+	o8RMD(rd#)RMD(rd#)
+	RMD(rd#)RMD(rd#)RMD(rd#)
+	RMD(rd#)RMD(rd#)RMD(rd#)	RMD(rd#)RMD(rd#)RMD(rd#)
+
+	#PPSR [6 RMD(rd#)]
+}
+#PART8a_3={
+	o5 #R #P l16 #PEDAL8a
+	r8r8r8r8r8r8
+	l2.#F RMD(d#>)#P r
+}
+#PART8a_4={
+	o4 #R #P l16 #PEDAL8a
+	r8r8r8r8r8r8
+	l2.#F RMD(d#)> #R2 #P RCD(d#a#>g)
+}
+
+TR(1)
+	#PART1_1
+ 	#tr1={
+		#PART2_1
+		#PART3_1
+		#PART4_1
+		#PART5_1
+		#PART6_1
+		#PART7_1
+		#PART8_1
+	}
+	LoopPlay(#tr1,#PART8a_1)
+	#PART9_1
+
+TR(2)
+	#PART1_2
+	#tr2={
+		#PART2_2
+		#PART3_2
+		#PART4_2
+		#PART5_2
+		#PART6_2
+		#PART7_2
+		#PART8_2
+	}
+	LoopPlay(#tr2,#PART8a_2)
+	#PART9_2
+
+TR(3)
+	#PART1_3
+	#tr3={
+		#PART2_3
+		#PART3_3
+		#PART4_3
+		#PART5_3
+		#PART6_3
+		#PART7_3
+		#PART8_3
+	}
+	LoopPlay(#tr3,#PART8a_3)
+	#PART9_3
+
+TR(4)
+	#PART1_4
+	#tr4={
+		#PART2_4
+		#PART3_4
+		#PART4_4
+		#PART5_4
+		#PART6_4
+		#PART7_4
+		#PART8_4
+	}
+	LoopPlay(#tr4,#PART8a_4)
+	#PART9_4
+
+TR(16)
+	#PART1_16
+	#tr16={
+		#PART2_16
+		#PART3_16
+		#PART4_16
+		#PART5_16
+		#PART6_16
+		#PART7_16
+		#PART8_16
+	}
+	LoopPlay(#tr16,#PART8a_16)
+	#PART9_16
