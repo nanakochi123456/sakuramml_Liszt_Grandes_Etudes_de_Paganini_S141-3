@@ -460,7 +460,7 @@ Function RMDV(Int VMIN, Int VMAX) {
 }
 
 Function RMDAV(Int VMIN, Int VMAX) {
-	RMD_CRESC=0
+//	RMD_CRESC=0
 	IF(VMAX=0) {
 		Int TMPMIN=RMD_AMIN
 		Int TMPMAX=RMD_AMAX
@@ -2134,8 +2134,8 @@ TR(4)
 çÏé“={"Ç»Ç»Ç±Ç¡ÇøÅö based by Niccolo Paganini / Franz Liszt"}
 
 îèéq 6,8
-
-#PEDALON={Sub {r384 y64,127}}
+//y23,64
+#PEDALON={Sub { r384 y64,127}}
 #PEDALOFF={Sub{r-48 RandR(53,80) y64,0}}
 #PEDALOFF2={Sub{r-96 RandR(112,256) y64,0}}
 #PEDALOFF3={Sub{r-64 RandR(70,80) y64,0}}

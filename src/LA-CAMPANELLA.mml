@@ -1,17 +1,17 @@
-// リスト パガニーニによる大練習曲3番 ラ・カンパネラ
-////////////////////////////////////////////////////
+// リスト パガニーニによる大練習曲3番 ラ・カンパネラ v1.1
+/////////////////////////////////////////////////////////
 // 作曲 Niccolo Paganini
 // 編曲 Franz Liszt
 
 Int DEBUG=0			// 1=メトロノーム 2=雑音付き
 Int KEY=0			// 移調
-Int RTEMPO=5		// テンポをRTEMPO%範囲内でランダムにする 0で無効
+Int RTEMPO=7		// テンポをRTEMPO%範囲内でランダムにする 0で無効
 Int TEMPORATIO=100	// テンポを％で変化させる 70%以下にしてはならない
 Int TINY=0			// MIDIを軽くする TWM2時必須
 Int IGNORETEMPO=0		// テンポ変化を無効にする
 // Tempo 65
 Int TEMPODIFF=0		// テンポ差分 -5以下にしてはならない
-Int LOOP=2			// ループ回数 26
+Int LOOP=1			// ループ回数 26
 System.RandomSeed=1	// 毎回同じ乱数を出す 発音タイミングと音長と音量とペダルのリリースとテンポが乱数
 
 Include(LA-CAMPANELLA.h)
@@ -210,12 +210,12 @@ Include(LA-CAMPANELLA.h)
 	#MS Q(110,112)RMDCresc(-2)RMD(>g#32f#32f32f#32)#MSR Q(44,46)RMD(d#>a#<<) r2
 	#F RMDCresc(-1)o6Q(110,112)RMD(g#32f#32f32f#32)#FR Q(44,46)RMD(c#>>c#<<f#>>c#<<)	#F Q(110,112)RMDCresc(-1)RMD(>a#32g#32g32g#32<)#FR Q(44,46)RMD(c#>>c#<<g#>>c#<<)
 
-	RMDCresc(-1)o6RMD(a#b>!c#8<ba# g#a#!b8a#g#)
+	#FSR RMDCresc(-1)o6RMD(a#b>!c#8<ba# g#a#!b8a#g#)
 	RMD(f#g#!a#8g#f# ff#!g#8d#f)
 	RMD(f#8)r8r8 #PSR RMDCresc(5)o5RMD(!g#>g#>g#<!g#>g#<!f#>)
 
-	#R #FSR RMDCresc(-9) RMD(g#<!e>>!f#<<g#>>!e<<g#>> !d#<<g#>>!c#<<g#>>!d#<<g#>>)
-	RMD(!e<<g#>>!c#<<g#)rr #FSR RMDCresc(-8)o5RMD(!f#>f#>f#<!f#>f#<!e>)
+	#R #FSR RMDCresc(-1) RMD(g#<!e>>!f#<<g#>>!e<<g#>> !d#<<g#>>!c#<<g#>>!d#<<g#>>)
+	RMD(!e<<g#>>!c#<<g#)rr #FSR RMDCresc(-2)o5RMD(!f#>f#>f#<!f#>f#<!e>)
 	RMD(f#<!d#>>!e<<f#>>!d#<<f#>> !c#<<f#>!b<f#>>!c#<<f#>>)
 	RMD(!d#<<f#>b<f#>)rr #R3 #PR o5RMD(!d#>d#>d#<!d#>d#<!d>)
 	#R #MR RMD(d#<c#>d#<c#>d#<<b)#R3 #MR o7RMD(ed#c#<ba#g#)
@@ -224,9 +224,9 @@ Include(LA-CAMPANELLA.h)
 
 	RMD(ga#)rrrr RMD(>!d#<d#)rrrr
 	RMD(>!d#<d#)rrrr RMD(>!d#<d#)rrRMD(>!d#<d#)
-	RMDCresc(8)rrRMD(>!d#<d#)rr RMD(>!d#<<a> >d#<<a#> >!d#<<b>)
-	RMD(>!d#<c>!d#<c#>!d#<d >)RMDCresc(-1)RMD(!d#<d#>d#<d#>d#<d#)
-	RMDCresc(-17)[3 RMD(>d#<d#)][3 RMD(>d#<d#<d#>d#)]#PPR RMD(>d#<d#)rRMD(d#>d#<d#)
+	RMDCresc(3)rrRMD(>!d#<d#)rr RMD(>!d#<<a> >d#<<a#> >!d#<<b>)
+	RMD(>!d#<c>!d#<c#>!d#<d >)RMDCresc(2)RMD(!d#<d#>d#<d#>d#<d#)
+	RMDCresc(-3)[3 RMD(>d#<d#)][3 RMD(>d#<d#<d#>d#)]#PPR RMD(>d#<d#)rRMD(d#>d#<d#)
 }
 
 #PART3_2={
@@ -342,17 +342,17 @@ Include(LA-CAMPANELLA.h)
 	RMD(d#>d#>d#<d#<d#>d# >d#<d#<d#>d#>d#<d#<)
 	RMD(d#>d#>d#<d#<d#>d#)[3 rRMD(d#)]
 	RMDCresc(3)rRMD(d#<g#b)rRMD(>>d#<)rRMD(d#<ga#)rRMD(>>d#<)
-	r4 o6#PR l24 RMDCresc(2)RMD(!d#>d#d# !d#d#>d#< !d#d#>d#< !c#c#>c#<)
+	r4 o6#PR l24 RMDCresc(1)RMD(!d#>d#d# !d#d#>d#< !d#d#>d#< !c#c#>c#<)
 
-	#MR RMDCresc(3)<RMD(!bb>b< !bb>b< !a#a#>a#< !g#g#>g#< !gg>g< !g#g#>g#<)
-	RMDCresc(-3)RMD(!a#a#>a#< !d#d#>d#< !d#d#>d#< !ee>e< !d#d#>d#< !c#c#>c#<)
-	RMDCresc(3)<RMD(!bb>b< !bb>b< !a#a#>a#< !g#g#>g#< !gg>g< !g#g#>g#<)
-	RMDCresc(-3)RMD(!a#a#>a#< !d#d#>d# d#d#d# >!d#d#>d#< !d#d#>d#< !c#c#>c#<)
-	RMDCresc(3)<RMD(!bb>b< !bb>b< !a#a#>a#< !g#g#>g#< !gg>g< !g#g#>g#<)
-	RMDCresc(-3)RMD(!a#a#>a#< !d#d#>d#< !d#d#>d#< !ee>e< !d#d#>d#< !c#c#>c#<)
-	RMDCresc(3)RMD(!d#d#>d#< !ee>d#< !ff>d#< !f#f#>d#< !gg>d#< !g#g#>d#<)
-	RMDCresc(2)RMD(!aa>d#< !a#a#>d#< !bb>d#< >!ccd# !c#c#d# !ddd#)
-	RMDCresc(-17)RMD(!d#d#>d#< !ee>d#< !ff>d#< !f#f#>d#< !gg>d#< !g#g#>d#<)
+	#MR RMDCresc(2)<RMD(!bb>b< !bb>b< !a#a#>a#< !g#g#>g#< !gg>g< !g#g#>g#<)
+	RMDCresc(-2)RMD(!a#a#>a#< !d#d#>d#< !d#d#>d#< !ee>e< !d#d#>d#< !c#c#>c#<)
+	RMDCresc(2)<RMD(!bb>b< !bb>b< !a#a#>a#< !g#g#>g#< !gg>g< !g#g#>g#<)
+	RMDCresc(-2)RMD(!a#a#>a#< !d#d#>d# d#d#d# >!d#d#>d#< !d#d#>d#< !c#c#>c#<)
+	RMDCresc(2)<RMD(!bb>b< !bb>b< !a#a#>a#< !g#g#>g#< !gg>g< !g#g#>g#<)
+	RMDCresc(-2)RMD(!a#a#>a#< !d#d#>d#< !d#d#>d#< !ee>e< !d#d#>d#< !c#c#>c#<)
+	RMDCresc(2)RMD(!d#d#>d#< !ee>d#< !ff>d#< !f#f#>d#< !gg>d#< !g#g#>d#<)
+	RMDCresc(1)RMD(!aa>d#< !a#a#>d#< !bb>d#< >!ccd# !c#c#d# !ddd#)
+	RMDCresc(-7)RMD(!d#d#>d#< !ee>d#< !ff>d#< !f#f#>d#< !gg>d#< !g#g#>d#<)
 }
 
 #PART4_2={
@@ -478,31 +478,31 @@ Include(LA-CAMPANELLA.h)
 	l32[12 RMD(g#a)]
 	Sub{[RMD(g#a)]RMD(g#16)r16 rRMD(gag) rRMD(f#g#f#)l39RMD(g#f#g#f#f)}r2.
 	l32[12 RMD(f#g#)]
-	RMDCresc(5)[RMD(f#g#)]RMD(f#16)r16 rRMD(dd#d) rRMD(d#ed#ed#ed#ed#ed#)
+	RMDCresc(2)[RMD(f#g#)]RMD(f#16)r16 rRMDCresc(-1)RMD(dd#d) rRMD(d#ed#ed#ed#ed#ed#)
 
-	#MR o7l41Sub{RMDCresc(15)RMD(ed#dd#eff#gg#aa#b>cc#dd#)RMDCresc(-15)RMD(ef#ed#dc#c<ba#ag#gf#fe)}r2.
-	Sub{l32 RMD(d#8) o5 Sub{RMD(a#8)}rRMD(>a#ba#<)>Sub{RMD(d8)}rRMD(>dd#d<)Sub{RMD(d#8)}rRMD(>d#ed# ed#ed# ed#ed#)}r2.
-	o7l41Sub{RMDCresc(15)RMD(ed#dd#eff#gg#aa#b>cc#dd#)RMDCresc(-15)RMD(ef#ed#dc#c<ba#ag#gf#fe)}r2.
-	o7l43Sub{RMDCresc(15)RMD(d#ed#dd#eff#gg#aa#b>cc#dd#)RMDCresc(-15)RMD(ef#ed#dc#c<ba#ag#gf#fe)}r2.
-	o7l60Sub{RMDCresc(15)RMD(d#ed#dd#eff#gg#aa#b>cc#dd#)RMDCresc(-4)RMD(ef#ed# dd#dc# cc#c<b a#ba#a g#ag#g f#gf#f ef#ed#)}r2.
-	o7l53Sub{RMD(dd#dc# cc#c<b a#ba#a g#ag#g f#gf#f ef#ed# dd#dc# cc#c<b a#ba#a g#ag#g)}r2.
+	#MR o7l41Sub{RMDCresc(3)RMD(ed#dd#eff#gg#aa#b>cc#dd#)RMDCresc(-1)RMD(ef#ed#dc#c<ba#ag#gf#fe)}r2.
+	Sub{RMDCresc(-3)l32 RMD(d#8) o5 Sub{RMD(a#8)}rRMD(>a#ba#<)>Sub{RMD(d8)}rRMD(>dd#d<)Sub{RMD(d#8)}rRMDCresc(1)RMD(>d#ed# ed#ed# ed#ed#)}r2.
+	#MR o7l41Sub{RMDCresc(3)RMD(ed#dd#eff#gg#aa#b>cc#dd#)RMDCresc(-2)RMD(ef#ed#dc#c<ba#ag#gf#fe)}r2.
+	o7l43Sub{RMDCresc(3)RMD(d#ed#dd#eff#gg#aa#b>cc#dd#)RMDCresc(-2)RMD(ef#ed#dc#c<ba#ag#gf#fe)}r2.
+	o7l60Sub{RMDCresc(3)RMD(d#ed#dd#eff#gg#aa#b>cc#dd#)RMDCresc(-1)RMD(ef#ed# dd#dc# cc#c<b a#ba#a g#ag#g f#gf#f ef#ed#)}r2.
+	o7l53Sub{RMD(dd#dc# cc#c<b a#ba#a g#ag#g f#gf#f ef#ed# dd#dc# cc#c<b a#ba#a g#ag#g)RMDCresc(0)}r2.
 	o5l37Sub{RMD(f#gf#f eded# fef#f gf#g#g ag#a#a ba#>c<b >c#cdc#)}r2.
 	o6l32Sub{RMD(d#ded# fef#f gf#g#g ag#a#a ba#>c<b >c#cdc#)}r2.
 	o7l32Sub{RMD(d#ded# fef#f gf#g#g ag#a#a ba#>c<b >c#cdc#)}r2.
-	o8l32Sub{[3 RMD(d#ded)][3 RMD(d#ded)]}r2.
-	o8l32Sub{[2 #FSR RMDCresc(-5)[3 RMD(d#ed#e)] ]}r2.
+	o8l32Sub{RMDCresc(3)[3 RMD(d#ded)]RMDCresc(5)[3 RMD(d#ded)]}r2.
+	o8l32Sub{[2 RMDCresc(4)[3 RMD(d#ed#e)] ]}r2.
 }
 
 #PART5_2={
 	o5 #R #MR l16 Q(30,32) #PEDAL5
 	r8r8 RMDCresc(-3)RMD(b)RMD(a#ag#gf#fe)
-	l8r #MR RMD(f#b >c#f#>c#)
-	RMD(d#<b16)r16 #MR l16RMDCresc(-3)RMD(d#)RMD(dc#c<ba#ag#)
-	l8r #MSR RMD(a#>d# fa#>f)
-	RMD(f#d#16)r16 #MSR l16RMDCresc(-3)o6RMD(f#)RMD(fed#dc#c<b)
-	l8r #FR RMD(>c#f# g#>c#)r
+	l8r #MSR RMD(f#b >c#f#>c#)
+	RMD(d#<b16)r16 #MSR l16RMDCresc(-3)RMD(d#)RMD(dc#c<ba#ag#)
+	l8r #FR RMD(a#>d# fa#>f)
+	RMD(f#d#16)r16 #FR l16RMDCresc(-3)o6RMD(f#)RMD(fed#dc#c<b)
+	l8r #FSR RMD(>c#f# g#>c#)r
 
-	o7 #MR l16 RMD(a#ag#gf#8)RMD(g#gf#fd#8)
+	o7 #MSR l16 RMD(a#ag#gf#8)RMD(g#gf#fd#8)
 	RMD(f#fd#dc#8)RMD(fd#dc#<b8)
 	l8ro6RMD(f#gg#)r4
 
@@ -613,15 +613,15 @@ Include(LA-CAMPANELLA.h)
 
 #PART6_1={
 	o5 #R #M l16 Q(30,32) #PEDAL6
-//	o8l32Sub{#FSR RMDCresc(-60)[3 RMD(d#ed#e)]}r4. #PSR [6 RMD(d#e)#PR]
-	o8l32Sub{#FSR RMD(d#ed#e) #FR RMD(d#ed#e) #MR RMD(d#ed#e)}r4. #PSR [2 RMD(d#e)]#PR [2 RMD(d#e)][2 RMD(d#e)]
+	o8l32Sub{RMDCresc(-5w wefr5)[3 RMD(d#ed#e)]}r4. RMDCresc(-6)[6 RMD(d#e)]#PPR
+//	o8l32Sub{#FSR RMD(d#ed#e) #FR RMD(d#ed#e) #MR RMD(d#ed#e)}r4. #PSR [2 RMD(d#e)]#PR [2 RMD(d#e)][2 RMD(d#e)]
 	[6 RMD(d#ed#e)]
 	[6 RMD(d#ed#e)]
 	[6 RMD(d#ed#e)]
 	[6 RMD(d#ed#e)]
-	[o8RMD(d#ed#<d# d#ed#<d#> d#24e24d#24)]
-	[o8RMD(d#ed#<d# d#ed#<d#> d#24e24d#24)]
-	[o8RMD(d#ed#<d#)r8r8]
+	#PSR [o8RMD(!d#ed#<d# !d#ed#<d#> !d#24e24d#24)]
+	[o8RMD(!d#ed#<d# !d#ed#<d#> !d#24e24d#24)]
+	[o8RMD(!d#ed#<d#)r8r8]
 	r8r8 #PR o6RMD(r>d#ed#)RMD(r>d#ed#<)RMD(r>d#ed#<)RMD(r>c#d#c#<)
 
 	[rRMD(b>c#<b)]rRMD(a#ba#)rRMD(g#a#g#)rRMD(gg#g)rRMD(g#a#g#)
@@ -784,8 +784,8 @@ Include(LA-CAMPANELLA.h)
 	RMD(a#>dd#dd#d)
 	RMD(d#d#d#d#d#d#)
 	RMD(d#d#d#d#d#d#)
-	l16RMDCresc(-15)[RMD(d#d#d#d#d#d#)]
-	RMDCresc(18)RMD(d#d#d#d#d#d# d#d#d#d#c#c#)
+	l16RMDCresc(-9)[RMD(d#d#d#d#d#d#)]
+	RMDCresc(11)RMD(d#d#d#d#d#d# d#d#d#d#c#c#)
 }
 #PART7_2={
 	o5 #R #FR l16 Q(50,22) #PEDAL7
@@ -816,8 +816,8 @@ Include(LA-CAMPANELLA.h)
 	RMD(a#>dd#dd#d)
 	RMD(d#d#d#d#d#d#)
 	RMD(d#d#d#d#d#d#)
-	l16RMDCresc(-15)[RMD(d#d#d#d#d#d#)]
-	RMDCresc(18)RMD(d#d#d#d#d#d# d#d#d#d#c#c#)
+	l16RMDCresc(-9)[RMD(d#d#d#d#d#d#)]
+	RMDCresc(11)RMD(d#d#d#d#d#d# d#d#d#d#c#c#)
 }
 
 #PART7_3={
@@ -924,11 +924,11 @@ Include(LA-CAMPANELLA.h)
 
 #PART8_1={
 	o7 #R3 #FF l16 Q(35,37) #PEDAL8
-	#FF RMDCresc(-10)RMD(bbbb)#FF RMDCresc(-10)RMD(a#a#)#FF RMDCresc(-10)RMD(g#g#)#FF RMDCresc(-10)RMD(gg)#FF RMDCresc(-10)RMD(g#g#)
-	#FF RMDCresc(-10)RMD(a#a#)#FF RMDCresc(-10)RMD(d#d#d#d#)#FF RMDCresc(-10)RMD(ee)#FF RMDCresc(-10)RMD(d#d#)#FF RMDCresc(-10)RMD(c#c#)<
-	#FF RMDCresc(-10)RMD(bbbb)#FF RMDCresc(-10)RMD(a#a#)#FF RMDCresc(-10)RMD(g#g#)#FF RMDCresc(-10)RMD(gg)#FF RMDCresc(-10)RMD(g#g#)
-	#FF RMDCresc(-10)RMD(a#a#)#FF RMDCresc(-10)RMD(d#d#)>#FF RMDCresc(-10)RMD(d#d#)>#FF RMDCresc(-10)RMD(d#d#d#d#)#FF RMDCresc(-10)RMD(c#c#)
-	#FF RMDCresc(-10)RMD(cccc)<#FF RMDCresc(-10)RMD(aa)#FF RMDCresc(-10)RMD(g#g#g#g#)#FF RMDCresc(-10)RMD(f#f#)
+	#FF RMDCresc(-6)RMD(bbbb)#FF RMDCresc(-6)RMD(a#a#)#FF RMDCresc(-6)RMD(g#g#)#FF RMDCresc(-6)RMD(gg)#FF RMDCresc(-6)RMD(g#g#)
+	#FF RMDCresc(-6)RMD(a#a#)#FF RMDCresc(-6)RMD(d#d#d#d#)#FF RMDCresc(-6)RMD(ee)#FF RMDCresc(-6)RMD(d#d#)#FF RMDCresc(-6)RMD(c#c#)<
+	#FF RMDCresc(-6)RMD(bbbb)#FF RMDCresc(-6)RMD(a#a#)#FF RMDCresc(-6)RMD(g#g#)#FF RMDCresc(-6)RMD(gg)#FF RMDCresc(-6)RMD(g#g#)
+	#FF RMDCresc(-6)RMD(a#a#)#FF RMDCresc(-6)RMD(d#d#)>#FF RMDCresc(-6)RMD(d#d#)>#FF RMDCresc(-6)RMD(d#d#d#d#)#FF RMDCresc(-6)RMD(c#c#)
+	#FF RMDCresc(-6)RMD(cccc)<#FF RMDCresc(-6)RMD(aa)#FF RMDCresc(-6)RMD(g#g#g#g#)#FF RMDCresc(-6)RMD(f#f#)
 	#FF RMD(e8)<RMDCresc(7)RMD(c#c#d#d#)RMDCresc(-6)RMD(eed#d#c#c#)
 	#FF RMD(d#)#FS RMDCresc(5)RMD(eff#gg# aa#b>cc#d)
 	#SF RMD(d#)#FFS RMDCresc(5)RMD(eff#gg# aa#b>c#dd#)
@@ -947,11 +947,11 @@ Include(LA-CAMPANELLA.h)
 
 #PART8_2={
 	o6 #R3 #FF l16 Q(35,37) #PEDAL8
-	#FF RMDCresc(-10)RMD(bbbb)#FF RMDCresc(-10)RMD(a#a#)#FF RMDCresc(-10)RMD(g#g#)#FF RMDCresc(-10)RMD(gg)#FF RMDCresc(-10)RMD(g#g#)
-	#FF RMDCresc(-10)RMD(a#a#)#FF RMDCresc(-10)RMD(d#d#d#d#)#FF RMDCresc(-10)RMD(ee)#FF RMDCresc(-10)RMD(d#d#)#FF RMDCresc(-10)RMD(c#c#)<
-	#FF RMDCresc(-10)RMD(bbbb)#FF RMDCresc(-10)RMD(a#a#)#FF RMDCresc(-10)RMD(g#g#)#FF RMDCresc(-10)RMD(gg)#FF RMDCresc(-10)RMD(g#g#)
-	#FF RMDCresc(-10)RMD(a#a#)#FF RMDCresc(-10)RMD(d#d#)>#FF RMDCresc(-10)RMD(d#d#)>#FF RMDCresc(-10)RMD(d#d#d#d#)#FF RMDCresc(-10)RMD(c#c#)
-	#FF RMDCresc(-10)RMD(cccc)<#FF RMDCresc(-10)RMD(aa)#FF RMDCresc(-10)RMD(g#g#g#g#)#FF RMDCresc(-10)RMD(f#f#)
+	#FF RMDCresc(-6)RMD(bbbb)#FF RMDCresc(-6)RMD(a#a#)#FF RMDCresc(-6)RMD(g#g#)#FF RMDCresc(-6)RMD(gg)#FF RMDCresc(-6)RMD(g#g#)
+	#FF RMDCresc(-6)RMD(a#a#)#FF RMDCresc(-6)RMD(d#d#d#d#)#FF RMDCresc(-6)RMD(ee)#FF RMDCresc(-6)RMD(d#d#)#FF RMDCresc(-6)RMD(c#c#)<
+	#FF RMDCresc(-6)RMD(bbbb)#FF RMDCresc(-6)RMD(a#a#)#FF RMDCresc(-6)RMD(g#g#)#FF RMDCresc(-6)RMD(gg)#FF RMDCresc(-6)RMD(g#g#)
+	#FF RMDCresc(-6)RMD(a#a#)#FF RMDCresc(-6)RMD(d#d#)>#FF RMDCresc(-6)RMD(d#d#)>#FF RMDCresc(-6)RMD(d#d#d#d#)#FF RMDCresc(-6)RMD(c#c#)
+	#FF RMDCresc(-6)RMD(cccc)<#FF RMDCresc(-6)RMD(aa)#FF RMDCresc(-6)RMD(g#g#g#g#)#FF RMDCresc(-6)RMD(f#f#)
 	#FF RMD(e8)<[10 RCD(ea)]
 	#FF RCD(d#g#b)#FS RMDCresc(5)RMD(eff#gg# aa#b>cc#d)
 	#SF RCD(d#ga#)#FFS RMDCresc(5)RMD(eff#gg# aa#b>c#dd#)
@@ -1038,7 +1038,7 @@ Include(LA-CAMPANELLA.h)
 
 #PART8a_1={
 	o7 #R #SF l8 #PEDAL8a
-	RMDCresc(-25)
+	RMDCresc(-7)
 	o7RMD(d#)RMD(d#)
 	RMD(d#d#d#)
 	RMD(d#d#d#d#d#d#)
@@ -1046,7 +1046,7 @@ Include(LA-CAMPANELLA.h)
 }
 #PART8a_2={
 	o7 #R #FF l16 #PEDAL8a
-	RMDCresc(-25)
+	RMDCresc(-7)
 	o8RMD(rd#)RMD(rd#)
 	RMD(rd#)RMD(rd#)RMD(rd#)
 	RMD(rd#)RMD(rd#)RMD(rd#)	RMD(rd#)RMD(rd#)RMD(rd#)
